@@ -33,16 +33,35 @@ const HomePage = () => {
           <FriendListWidget />
         </Box>
         <Box flexBasis={isNonMobileScreens ? "55%" : undefined}>
-          <Tabs value={selectedTab} onChange={handleTabChange} indicatorColor="primary">
-            <Tab value="posts" label="Posts" />
-            <Tab value="announcements" label="Announcements" />
-          </Tabs>
-          {selectedTab === "posts" ? <PostsWidget /> : <AnnouncementsWidget />} {/* Toggle between PostsWidget and AnnouncementsWidget */}
+          {isNonMobileScreens ? (
+            <>
+              <Tabs value={selectedTab} onChange={handleTabChange} indicatorColor="primary">
+                <Tab value="posts" label="Posts" />
+                <Tab value="announcements" label="Announcements" />
+              </Tabs>
+              {selectedTab === "posts" ? <PostsWidget /> : <AnnouncementsWidget />} {/* Toggle between PostsWidget and AnnouncementsWidget */}
+            </>
+          ) : (
+            <PostsWidget /> 
+          )}
         </Box>
         <Box flexBasis={isNonMobileScreens ? "20%" : undefined}>
           <CommunitiesWidget />
         </Box>
       </Box>
+      {/* Mobile view tabs */}
+      {!isNonMobileScreens && (
+        <Tabs
+          value={selectedTab}
+          onChange={handleTabChange}
+          indicatorColor="primary"
+          variant="fullWidth"
+        >
+          <Tab value="posts" label="Posts" />
+          <Tab value="announcements" label="Announcements" />
+          <Tab value="communities" label="Communities" />
+        </Tabs>
+      )}
     </Box>
   );
 };
