@@ -28,18 +28,18 @@ const HomePage = () => {
         gap="0.5rem"
         justifyContent="space-between"
       >
-        <Box flexBasis={isNonMobileScreens ? "26%" : undefined}>
+        <Box flexBasis={isNonMobileScreens ? "20%" : undefined}>
           <UserWidget userId={_id} picturePath={picturePath} />
           <FriendListWidget />
         </Box>
-        <Box flexBasis={isNonMobileScreens ? "40%" : undefined}>
+        <Box flexBasis={isNonMobileScreens ? "55%" : undefined}>
           <Tabs value={selectedTab} onChange={handleTabChange} indicatorColor="primary">
             <Tab value="posts" label="Posts" />
             <Tab value="announcements" label="Announcements" />
           </Tabs>
           {selectedTab === "posts" ? <PostsWidget /> : <AnnouncementsWidget />} {/* Toggle between PostsWidget and AnnouncementsWidget */}
         </Box>
-        <Box flexBasis={isNonMobileScreens ? "26%" : undefined}>
+        <Box flexBasis={isNonMobileScreens ? "20%" : undefined}>
           <CommunitiesWidget />
         </Box>
       </Box>
