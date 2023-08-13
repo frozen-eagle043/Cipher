@@ -8,36 +8,28 @@ import {
   import UserImage from "components/UserImage";
   import FlexBetween from "components/FlexBetween";
   import WidgetWrapper from "components/WidgetWrapper";
-  import { useSelector } from "react-redux";
-  import { useEffect, useState } from "react";
   import { useNavigate } from "react-router-dom";
   
   const UserWidget = ({ userId, picturePath }) => {
-    const [user, setUser] = useState(null);
     const { palette } = useTheme();
     const navigate = useNavigate();
-    const token = useSelector((state) => state.token);
     const dark = palette.neutral.dark;
     const medium = palette.neutral.medium;
     const main = palette.neutral.main;
   
-    const getUser = async () => {
-      const response = await fetch(`http://localhost:3001/users/${userId}`, {
-        method: "GET",
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      const data = await response.json();
-      setUser(data);
+    const dummyUser = {
+      firstName: 'Shivam',
+      lastName: 'Devaser',
+      location: 'Gwalior',
+      occupation: 'Software Engineer',
+      viewedProfile: 123,
+      impressions: 256,
+      friends: [
+        { _id: 'friend1', name: 'Alice' },
+        { _id: 'friend2', name: 'Bob' },
+        { _id: 'friend3', name: 'Eve' },
+      ],
     };
-  
-    useEffect(() => {
-      getUser();
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
-  
-    if (!user) {
-      return null;
-    }
-  
     const {
       firstName,
       lastName,
@@ -46,7 +38,7 @@ import {
       viewedProfile,
       impressions,
       friends,
-    } = user;
+    } = dummyUser;
   
     return (
       <WidgetWrapper>
@@ -120,7 +112,7 @@ import {
   
           <FlexBetween gap="1rem" mb="0.5rem">
             <FlexBetween gap="1rem">
-              <img src="../assets/twitter.png" alt="twitter" />
+              <img src="/assets/p11.jpeg" alt="twitter" />
               <Box>
                 <Typography color={main} fontWeight="500">
                   Twitter
@@ -133,7 +125,7 @@ import {
   
           <FlexBetween gap="1rem">
             <FlexBetween gap="1rem">
-              <img src="../assets/linkedin.png" alt="linkedin" />
+              <img src="/assets/p11.jpeg" alt="linkedin" />
               <Box>
                 <Typography color={main} fontWeight="500">
                   Linkedin

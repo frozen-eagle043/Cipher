@@ -5,27 +5,48 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setFriends } from "state";
 
-const FriendListWidget = ({ userId }) => {
-  const dispatch = useDispatch();
+const FriendListWidget = () => {
+  //const dispatch = useDispatch();
   const { palette } = useTheme();
-  const token = useSelector((state) => state.token);
-  const friends = useSelector((state) => state.user.friends);
+  //const friends = useSelector((state) => state.user.friends);
 
-  const getFriends = async () => {
-    const response = await fetch(
-      `http://localhost:3001/users/${userId}/friends`,
-      {
-        method: "GET",
-        headers: { Authorization: `Bearer ${token}` },
-      }
-    );
-    const data = await response.json();
-    dispatch(setFriends({ friends: data }));
-  };
+  // Replace actual API call with fake data
+  const fakeFriendsData = [
+    {
+      _id: 1,
+      firstName: "Alice",
+      lastName: "Smith",
+      occupation: "Software Engineer",
+      picturePath: "/path/to/picture1.jpg",
+    },
+    {
+      _id: 2,
+      firstName: "Bob",
+      lastName: "Johnson",
+      occupation: "Data Scientist",
+      picturePath: "/path/to/picture2.jpg",
+    },
+    {
+      _id: 3,
+      firstName: "Alice",
+      lastName: "Smith",
+      occupation: "Software Engineer",
+      picturePath: "/path/to/picture1.jpg",
+    },
+    {
+      _id: 4,
+      firstName: "Alice",
+      lastName: "Smith",
+      occupation: "Software Engineer",
+      picturePath: "/path/to/picture1.jpg",
+    },
+    
+  ];
 
-  useEffect(() => {
-    getFriends();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  //useEffect(() => {
+    // Dispatch the fake data to the Redux store
+  //   dispatch(setFriends({ friends: fakeFriendsData }));
+  // }, [dispatch]);
 
   return (
     <WidgetWrapper>
@@ -38,7 +59,7 @@ const FriendListWidget = ({ userId }) => {
         Friend List
       </Typography>
       <Box display="flex" flexDirection="column" gap="1.5rem">
-        {friends.map((friend) => (
+        {fakeFriendsData.map((friend) => (
           <Friend
             key={friend._id}
             friendId={friend._id}

@@ -1,15 +1,22 @@
 import { Box, useMediaQuery } from "@mui/material";
-import { useSelector } from "react-redux";
+import React, { useState } from "react";
 import Navbar from "scenes/navbar";
 import UserWidget from "scenes/widgets/UserWidget";
-import MyPostWidget from "scenes/widgets/MyPostWidget";
+import { Tab, Tabs } from "@mui/material";
 import PostsWidget from "scenes/widgets/PostsWidget";
-import AdvertWidget from "scenes/widgets/AdvertWidget";
+import AnnouncementsWidget from "scenes/widgets/AnnouncementsWidget";
 import FriendListWidget from "scenes/widgets/FriendListWidget";
+import CommunitiesWidget from "scenes/widgets/CommunitiesWidget";
 
 const HomePage = () => {
   const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
-  const { _id, picturePath } = useSelector((state) => state.user);
+  const [_id, picturePath] = [1, '/assets/p11.jpeg']; // Placeholder values
+
+  const [selectedTab, setSelectedTab] = useState("posts"); // Initialize the selected tab state
+
+  const handleTabChange = (event, newValue) => {
+    setSelectedTab(newValue);
+  };
 
   return (
     <Box>
@@ -23,21 +30,18 @@ const HomePage = () => {
       >
         <Box flexBasis={isNonMobileScreens ? "26%" : undefined}>
           <UserWidget userId={_id} picturePath={picturePath} />
+          <FriendListWidget />
         </Box>
-        <Box
-          flexBasis={isNonMobileScreens ? "42%" : undefined}
-          mt={isNonMobileScreens ? undefined : "2rem"}
-        >
-          <MyPostWidget picturePath={picturePath} />
-          <PostsWidget userId={_id} />
+        <Box flexBasis={isNonMobileScreens ? "40%" : undefined}>
+          <Tabs value={selectedTab} onChange={handleTabChange} indicatorColor="primary">
+            <Tab value="posts" label="Posts" />
+            <Tab value="announcements" label="Announcements" />
+          </Tabs>
+          {selectedTab === "posts" ? <PostsWidget /> : <AnnouncementsWidget />} {/* Toggle between PostsWidget and AnnouncementsWidget */}
         </Box>
-        {isNonMobileScreens && (
-          <Box flexBasis="26%">
-            <AdvertWidget />
-            <Box m="2rem 0" />
-            <FriendListWidget userId={_id} />
-          </Box>
-        )}
+        <Box flexBasis={isNonMobileScreens ? "26%" : undefined}>
+          <CommunitiesWidget />
+        </Box>
       </Box>
     </Box>
   );

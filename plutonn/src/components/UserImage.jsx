@@ -8,7 +8,7 @@ const UserImage = ({ image, size = "60px" }) => {
         width={size}
         height={size}
         alt="user"
-        src={`http://localhost:3001/assets/${image}`}
+        src='https://static.wikia.nocookie.net/marveldatabase/images/5/5f/Timeless_Vol_1_1_Textless.jpg/revision/latest?cb=20211209001859'
       />
     </Box>
   );
